@@ -1,26 +1,26 @@
 (ns clojure-dsl.core)
 
 (defmulti emit-bash
-    (fn [from]
-          (class from)))
+    (fn [form]
+          (class form)))
 
 (defmethod emit-bash
     clojure.lang.PersistentList
-    [from]
-    (case (name (first from))
-          "println" (str "echo " (second from))))
+    [form]
+    (case (name (first form))
+          "println" (str "echo " (second form))))
 
 (defmethod emit-bash
     java.lang.String
-    [from]
-    from)
+    [form]
+    form)
 
 (defmethod emit-bash
     java.lang.Integer
-    [from]
-    (str from))
+    [form]
+    (str form))
 
 (defmethod emit-bash
     java.lang.Double
-    [from]
-    (str from))
+    [form]
+    (str form))
